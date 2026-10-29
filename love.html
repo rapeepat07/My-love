@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สำหรับเบ้บของเค้า ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Prompt & Itim for Cute Thai Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        love: {
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                        }
+                    },
+                    fontFamily: {
+                        itim: ['Itim', 'cursive'],
+                        prompt: ['Prompt', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .font-cute {
+            font-family: 'Itim', cursive;
+        }
+
+        /* Floating Hearts Animation */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatHeart 6s linear infinite;
+        }
+
+        /* Card Slide Animations */
+        .slide-in {
+            animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide-out {
+            animation: slideOutLeft 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        /* Push Out Pull In animation for Page 4 repeat attempts */
+        .push-out-pull-in {
+            animation: pushPull 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-100%) scale(0.9);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pushPull {
+            0% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            45% {
+                transform: translateX(-110%) scale(0.85);
+                opacity: 0;
+            }
+            55% {
+                transform: translateX(110%) scale(0.85);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Fingerprint Pulse */
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(244, 63, 94, 0.8);
+            }
+        }
+
+        .fingerprint-btn {
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* Letter Background Styling */
+        .letter-bg {
+            background-color: #fffaf0;
+            background-image: radial-gradient(#fecdd3 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Custom scrollbar for letter text */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #fef1f2;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fda4af;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative select-none">
+
+    <!-- Floating Background Hearts Container -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Main App Container -->
+    <main class="w-full max-w-md relative z-10 my-auto min-h-[540px]">
+
+        <!-- ================= PAGE 1: Fingerprint Scan ================= -->
+        <section id="page1" class="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-4 border-pink-200 text-center flex flex-col items-center justify-between min-h-[500px]">
+            <div>
+                <h1 class="font-cute text-3xl font-bold text-pink-600 mb-2 mt-4">กดเพื่อเข้าไปนะคับเบ้บ 💕</h1>
+                <p class="text-gray-500 text-sm">เเสกนลายนิ้วมือตรงนี้เลยน้า 👆✨</p>
+            </div>
+
+            <!-- Fingerprint Scan Area -->
+            <div class="my-8 flex flex-col items-center justify-center w-full">
+                <button id="scan-btn" 
+                        class="fingerprint-btn relative w-36 h-36 rounded-full bg-pink-50 border-4 border-pink-400 text-pink-500 flex items-center justify-center text-6xl transition-transform active:scale-95 focus:outline-none cursor-pointer">
+                    <i class="fa-solid fa-fingerprint"></i>
+                    
+                    <!-- Circular SVG Progress Ring -->
+                    <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="44" stroke="#fecdd3" stroke-width="6" fill="transparent" />
+                        <circle id="scan-progress-circle" cx="50" cy="50" r="44" stroke="#f43f5e" stroke-width="6" fill="transparent"
+                                stroke-dasharray="276.46" stroke-dashoffset="276.46" stroke-linecap="round" class="transition-all duration-75" />
+                    </svg>
+                </button>
+                <p id="scan-hint" class="font-cute text-pink-500 font-medium text-lg mt-6">แตะค้างไว้ 5 วินาทีเพื่อสแกน 💖</p>
+            </div>
+
+            <!-- Lock Icon Indicator -->
+            <div class="text-pink-300 text-2xl mb-2">
+                <i id="lock-icon" class="fa-solid fa-lock"></i>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: Ask Love ================= -->
+        <section id="page2" class="hidden bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-4 border-pink-200 text-center flex-col items-center justify-between min-h-[520px]">
+            <div>
+                <span class="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-xs font-semibold mb-2">💌 มีความในใจจะบอก</span>
+                <h2 class="font-cute text-2xl md:text-3xl font-bold text-pink-600 mb-3">เค้ารักเบ้บมากๆเลยนะคับ 💖</h2>
+            </div>
+
+            <!-- Image with fallback -->
+            <div class="my-2 w-full overflow-hidden rounded-2xl shadow-md border-2 border-pink-100 bg-pink-50 flex justify-center items-center">
+                <img src="https://i.pinimg.com/736x/4e/53/fe/4e53fe07773cfd1c81fe1d83dafac977.jpg" 
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80';" 
+                     alt="Cute Cat Holding Heart" 
+                     class="w-full h-56 object-contain p-2 hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="w-full space-y-3 mt-4 flex flex-col items-center">
+                <button onclick="goToPage(3)" 
+                        class="w-full py-3.5 px-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg hover:brightness-110 active:scale-95 transition-all text-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-heart"></i> รักเบ้บเหมือนกัน 🥰
+                </button>
+                <button onclick="goToPage(4)" 
+                        class="w-full py-3 px-6 bg-gray-100 text-gray-500 font-medium rounded-2xl hover:bg-gray-200 active:scale-95 transition-all text-base">
+                    ไม่รัก 🥺
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: Love Letter ================= -->
+        <section id="page3" class="hidden letter-bg rounded-3xl p-6 shadow-2xl border-4 border-pink-300 flex-col justify-between min-h-[520px] relative overflow-hidden">
+            <div class="absolute -top-6 -right-6 text-pink-200 text-8xl pointer-events-none opacity-40">
+                <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+
+            <div class="relative z-10">
+                <div class="border-b-2 border-pink-200 pb-3 mb-3 text-center">
+                    <h2 class="font-cute text-2xl font-bold text-pink-600">เค้าก็รักเบ้บมากๆ เหมือนกันนะคับ ❤️🥰</h2>
+                </div>
+
+                <!-- Long Text Message -->
+                <div class="text-gray-700 text-sm md:text-base leading-relaxed space-y-3 max-h-[330px] overflow-y-auto pr-2 custom-scrollbar">
+                    <p class="indent-4">
+                        เค้ารักเบ้บมากๆ อะไรที่เค้าทำไม่ดีเค้าก็ลองโทษด้วย อยากให้เบ้บคอยช่วยสอนอะไรที่เค้าเผลอทำไปเเล้วทำให้เบ้บโกรธหรือไม่พอใจ เค้าอยากปรับตรงนั้นเพื่อให้เรื่องมันจบไปไวๆ สิ่งที่เบ้บไม่เชื่อเค้าก็จะไม่บังคับให้เบ้บเชื่อ เเต่เค้าก็จะเเสดงให้เบ้บเห็นเองว่า เค้าทำจริงพูดจริง เค้ายังอยากอยู่กับเบ้บไปตลอดเเละอยากอยู่ด้วยกัน สักวันหนึ่งเค้าอยากให้มีเด็กคนนึงเรียกเค้าว่าพ่อ เเละเรียกเบ้บว่าเเม่ไม่จากกันไปไหนนะคับ ช่วยปรับความเข้าใจหรืออะไรก็ได้ที่เค้าจะทำให้เบ้บอยู่กับเค้าไปตลอด เบ้บไม่ต้องเก่งทุกเรื่อง ไม่ต้องเก่งเท่าใคร ไม่ต้องเหมือนใครเค้าเชรักเเค่เบ้บคนเดียวนะคับ เค้ารักเบ้บนะคับ จุ๊บมั๊วววววววว 💋💖🥰
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-4 relative z-10">
+                <button onclick="goToPage(5)" 
+                        class="w-full py-3.5 px-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg hover:brightness-110 active:scale-95 transition-all text-lg flex items-center justify-center gap-2">
+                    เข้าใจเเล้ว 💕
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: Sulking / Random Jumping 'Not Love' Button ================= -->
+        <section id="page4" class="hidden bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-4 border-rose-300 text-center flex-col items-center justify-between min-h-[520px] relative">
+            <div>
+                <h2 class="font-cute text-3xl font-bold text-rose-600 mb-2 animate-bounce">ไม่อาวววววววว 😭💔</h2>
+                <p class="text-rose-400 text-xs font-medium">กดปุ่มผิดแน่นอน! ปุ่มแอบหนีแล้วนะ 😜</p>
+            </div>
+
+            <!-- Image for Page 4 -->
+            <div class="my-2 w-full overflow-hidden rounded-2xl shadow-md border-2 border-rose-100 bg-rose-50 flex justify-center items-center pointer-events-none">
+                <img src="https://i.pinimg.com/736x/ce/13/28/ce13284dbcb9d641fbe25265e587c267.jpg" 
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80';" 
+                     alt="Crying Cat" 
+                     class="w-full h-52 object-contain p-2">
+            </div>
+
+            <!-- Container for Love Button (Fixed at bottom) -->
+            <div class="w-full mt-2">
+                <button onclick="goToPage(3)" 
+                        class="w-full py-3.5 px-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg hover:brightness-110 active:scale-95 transition-all text-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-heart"></i> รักเบ้บเหมือนกัน 💕
+                </button>
+            </div>
+
+            <!-- Jumpable 'Not Love' Button (positioned dynamically across entire screen) -->
+            <button id="not-love-jump-btn" 
+                    onclick="handleNotLoveJump()" 
+                    class="py-2.5 px-6 bg-gray-100 text-gray-500 font-medium rounded-2xl border border-pink-200 shadow-md hover:bg-rose-100 transition-all text-sm z-50 cursor-pointer">
+                ไม่รัก 😜
+            </button>
+        </section>
+
+
+        <!-- ================= PAGE 5: Final Love Page ================= -->
+        <section id="page5" class="hidden bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-4 border-pink-300 text-center flex-col items-center justify-between min-h-[500px]">
+            <div class="mt-2">
+                <div class="inline-block text-4xl mb-1 animate-pulse">💖✨</div>
+                <h2 class="font-cute text-3xl font-bold text-pink-600 mb-2">รักที่ฉุดเยยยยยยยยย 🥰💋</h2>
+                <p class="text-pink-400 text-sm font-medium">ขอบคุณที่เข้าใจและอยู่เคียงข้างกันนะคับ 💕</p>
+            </div>
+
+            <!-- Image for Page 5 -->
+            <div class="my-4 w-full overflow-hidden rounded-2xl shadow-lg border-2 border-pink-200 bg-pink-50 flex justify-center items-center">
+                <img src="https://i.pinimg.com/1200x/0e/18/29/0e18294586cddc6c804ae06a1cd157d1.jpg" 
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80';" 
+                     alt="Blowing Kiss Cat" 
+                     class="w-full h-60 object-contain p-2 hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <div class="w-full py-3.5 bg-pink-100 text-pink-600 font-cute text-xl rounded-2xl shadow-inner border border-pink-200 flex items-center justify-center gap-2">
+                <span>จุ๊บๆ อยู่ด้วยกันตลอดไปน้า 💋</span> <i class="fa-solid fa-heart text-rose-500"></i>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // State Variables
+        let currentPage = 1;
+        let scanTimer = null;
+        let scanProgress = 0;
+        const SCAN_DURATION = 5000; // 5 seconds
+        const PROGRESS_INTERVAL = 50; // update every 50ms
+
+        // Elements
+        const scanBtn = document.getElementById('scan-btn');
+        const progressCircle = document.getElementById('scan-progress-circle');
+        const scanHint = document.getElementById('scan-hint');
+        const lockIcon = document.getElementById('lock-icon');
+        const jumpBtn = document.getElementById('not-love-jump-btn');
+        const circumference = 2 * Math.PI * 44; // r=44
+
+        // Initialize Progress Ring
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100 * circumference);
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        // Handle Fingerprint Long Press Scanning
+        function startScan(e) {
+            if (e.type === 'touchstart') e.preventDefault();
+            if (currentPage !== 1) return;
+
+            scanProgress = 0;
+            scanHint.innerText = 'กำลังสแกน... อย่าเพิ่งปล่อยน้า 💓';
+            scanHint.classList.add('animate-pulse');
+
+            const increment = (PROGRESS_INTERVAL / SCAN_DURATION) * 100;
+
+            scanTimer = setInterval(() => {
+                scanProgress += increment;
+                if (scanProgress >= 100) {
+                    scanProgress = 100;
+                    setProgress(100);
+                    clearInterval(scanTimer);
+                    scanSuccess();
+                } else {
+                    setProgress(scanProgress);
+                }
+            }, PROGRESS_INTERVAL);
+        }
+
+        function stopScan() {
+            if (scanProgress < 100) {
+                clearInterval(scanTimer);
+                scanProgress = 0;
+                setProgress(0);
+                scanHint.innerText = 'แตะค้างไว้ 5 วินาทีเพื่อสแกน 💖';
+                scanHint.classList.remove('animate-pulse');
+            }
+        }
+
+        function scanSuccess() {
+            scanHint.innerText = 'สแกนสำเร็จแล้วจ้า! ✨';
+            scanBtn.classList.remove('text-pink-500');
+            scanBtn.classList.add('text-green-500', 'bg-green-50', 'border-green-400');
+            lockIcon.className = 'fa-solid fa-lock-open text-green-500';
+
+            setTimeout(() => {
+                goToPage(2);
+            }, 600);
+        }
+
+        // Attach touch and mouse events for Fingerprint Button
+        scanBtn.addEventListener('mousedown', startScan);
+        scanBtn.addEventListener('mouseup', stopScan);
+        scanBtn.addEventListener('mouseleave', stopScan);
+
+        scanBtn.addEventListener('touchstart', startScan);
+        scanBtn.addEventListener('touchend', stopScan);
+        scanBtn.addEventListener('touchcancel', stopScan);
+
+
+        // Page Transition Functionality
+        function goToPage(targetPage) {
+            const currentEl = document.getElementById(`page${currentPage}`);
+            const targetEl = document.getElementById(`page${targetPage}`);
+
+            if (!currentEl || !targetEl) return;
+
+            currentEl.classList.add('slide-out');
+
+            setTimeout(() => {
+                currentEl.classList.add('hidden');
+                currentEl.classList.remove('slide-out', 'flex');
+
+                targetEl.classList.remove('hidden');
+                targetEl.classList.add('flex', 'slide-in');
+
+                currentPage = targetPage;
+
+                if (targetPage === 4) {
+                    resetAndMoveNotLoveBtn();
+                }
+
+                setTimeout(() => {
+                    targetEl.classList.remove('slide-in');
+                }, 500);
+            }, 450);
+        }
+
+        // Move 'ไม่รัก' button to random screen area when clicked on Page 4
+        function handleNotLoveJump() {
+            const page4El = document.getElementById('page4');
+            
+            // Trigger push-out and pull-in effect on page 4
+            page4El.classList.remove('push-out-pull-in');
+            void page4El.offsetWidth; // Trigger DOM reflow
+            page4El.classList.add('push-out-pull-in');
+
+            // Move the button after small delay matching transition
+            setTimeout(() => {
+                resetAndMoveNotLoveBtn();
+            }, 200);
+        }
+
+        function resetAndMoveNotLoveBtn() {
+            // Position button anywhere visible on screen (fixed across viewport)
+            jumpBtn.style.position = 'fixed';
+
+            const btnWidth = jumpBtn.offsetWidth || 100;
+            const btnHeight = jumpBtn.offsetHeight || 40;
+            const padding = 20;
+
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            jumpBtn.style.left = `${randomX}px`;
+            jumpBtn.style.top = `${randomY}px`;
+        }
+
+        // Background Hearts Generator
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            if (!container) return;
+
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            
+            const icons = ['fa-heart', 'fa-sparkles', 'fa-kiss-wink-heart', 'fa-heart-pulse'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            heart.innerHTML = `<i class="fa-solid ${randomIcon}"></i>`;
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 16 + 12 + 'px';
+            
+            const colors = ['#f43f5e', '#fb7185', '#fda4af', '#e11d48', '#ff85a1'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Spawn background hearts continuously
+        setInterval(createHeart, 350);
+
+        // Make sure Flex styling is set correctly initially
+        document.getElementById('page1').classList.add('flex');
+    </script>
+</body>
+</html>
